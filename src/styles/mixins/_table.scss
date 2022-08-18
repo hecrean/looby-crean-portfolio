@@ -1,0 +1,92 @@
+@use "sass:color";
+
+@mixin table($primary-color, $secondary-color, $tertiary-color, $hover-color) {
+  background-color: $primary-color;
+  color: $secondary-color;
+
+  /* offset-x | offset-y | blur-radius | spread-radius | color */
+  box-shadow: 2px 2px 2px 1px darken($primary-color, 20%);
+
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  table-layout: fixed;
+  empty-cells: hide;
+  font-size: small;
+
+  th,
+  td {
+    // transition: opacity 0.2s;
+    // &:hover {
+    //   opacity: 0.8;
+    // }
+  }
+
+  th {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    display: table-cell;
+    color: $secondary-color;
+
+    &[scope="colgroup"] {
+      background: rgb(173, 223, 237);
+      text-align: start;
+      padding: 8px 20px;
+      margin: 0;
+    }
+
+    &[scope="col"] {
+      padding: 8px 20px;
+      text-transform: uppercase;
+      color: $primary-color;
+      background-color: $secondary-color;
+    }
+    &[scope="row"] {
+      vertical-align: middle;
+      //   &:hover,
+      //   &:focus {
+      //     opacity: 0.7;
+      //   }
+    }
+  }
+
+  td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    color: $secondary-color;
+
+    vertical-align: top;
+    padding: 0.625em;
+    font-size: small;
+    font-size: smaller;
+    word-wrap: break-word;
+    white-space: normal;
+    // border-left: 1px solid white;
+    // border-right: 1px solid white;
+
+    //Align numbers centrally, and lists to the left
+    text-align: center;
+    ul,
+    ol,
+    li {
+      text-align: start;
+    }
+  }
+
+  tr {
+    // border-bottom: 1px solid rgb(251, 251, 251);
+
+    // &:hover {
+    //   background-color: $hover-color;
+    //   color: $eylea-white;
+    // }
+
+    &:last-child {
+      border: 0;
+    }
+  }
+}

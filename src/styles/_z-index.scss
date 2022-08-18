@@ -1,0 +1,6 @@
+@use "sass:math";
+
+/* Try to only use numbers between 0-5*/
+@function z-index($i) {
+  @return $i;
+}
