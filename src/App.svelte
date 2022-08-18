@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Scroll from "@/components/Scroll.svelte";
+  import HomePage from "@/pages/home-page.svelte";
   import { Route, router } from "tinro";
   router.mode.memory();
 
@@ -12,7 +12,7 @@
     {#if loading}
       <div />
     {:else}
-      <Scroll />
+      <HomePage />
     {/if}
   </Route>
 </Route>

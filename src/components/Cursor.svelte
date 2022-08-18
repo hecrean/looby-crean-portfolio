@@ -14,7 +14,7 @@
 
 <svelte:window
   on:mousemove={(e) => coords.set({ x: e.clientX, y: e.clientY })}
-  on:mousedown={() => size.set(30)}
+  on:mousedown={() => size.set(10)}
   on:mouseup={() => size.set(10)}
 />
 
