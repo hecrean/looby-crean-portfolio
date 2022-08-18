@@ -12,26 +12,27 @@
   let size = spring(10);
 </script>
 
+<svelte:window
+  on:mousemove={(e) => coords.set({ x: e.clientX, y: e.clientY })}
+  on:mousedown={() => size.set(30)}
+  on:mouseup={() => size.set(10)}
+/>
+
 <div class="cursor-wrapper">
-  <svg
-    on:mousemove={(e) => coords.set({ x: e.clientX, y: e.clientY })}
-    on:mousedown={() => size.set(30)}
-    on:mouseup={() => size.set(10)}
-  >
+  <svg>
     <circle cx={$coords.x} cy={$coords.y} r={$size} />
   </svg>
 </div>
 
 <style>
   .cursor-wrapper {
+    pointer-events: none;
+    background-color: transparent;
     position: fixed;
-    width: 100vw;
-    height: 100vh;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: transparent;
     z-index: 9000;
   }
   svg {
