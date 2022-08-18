@@ -1,6 +1,6 @@
 import { writable } from "svelte/store";
 
-export function modalStore(initial: boolean) {
+export function booleanStore(initial: boolean) {
   const isOpen = writable<boolean>(initial);
   const { set, update } = isOpen;
   return {

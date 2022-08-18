@@ -1,0 +1,27 @@
+@mixin button() {
+  // resets:
+  border: none;
+  align-items: center;
+  appearance: none;
+  box-sizing: border-box;
+  display: inline-flex;
+  flex-shrink: 0;
+  justify-content: center;
+  line-height: 1;
+  margin: 0;
+  outline: none;
+  padding: 0;
+  text-decoration: none;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  ::before {
+    box-sizing: border-box;
+  }
+  ::after {
+    box-sizing: border-box;
+  }
+  //
+  background-color: transparent;
+  pointer-events: all;
+  cursor: pointer;
+}

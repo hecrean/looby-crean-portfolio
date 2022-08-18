@@ -24,7 +24,9 @@
   </svg>
 </div>
 
-<style>
+<style lang="scss">
+  @import "../styles/z-index";
+
   .cursor-wrapper {
     pointer-events: none;
     background-color: transparent;
@@ -33,7 +35,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 9000;
+    z-index: $z-10;
   }
   svg {
     width: 100%;

@@ -1,6 +1,18 @@
 @use "sass:math";
 
 /* Try to only use numbers between 0-5*/
-@function z-index($i) {
-  @return $i;
+@function z-index($i: 0) {
+  @return math.pow(2, $i);
 }
+
+$z-0: 0;
+$z-1: 2;
+$z-2: 4;
+$z-3: 8;
+$z-4: 16;
+$z-5: 32;
+$z-6: 64;
+$z-7: 64;
+$z-8: 128;
+$z-9: 256;
+$z-10: 512;
