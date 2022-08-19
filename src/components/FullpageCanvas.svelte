@@ -1,3 +1,6 @@
+<script lang="ts" context="module">
+</script>
+
 <script lang="ts">
   import { canvasStore, glStore } from "@/stores/canvas.store";
   import { onMount } from "svelte";
@@ -19,6 +22,8 @@
     $canvasStore.height = h;
 
     $glStore.lineWidth = 10;
+
+    screen.orientation.lock("portrait");
   });
 </script>
 
@@ -28,6 +33,22 @@
     $canvasStore.height = h;
   }}
 />
+<!-- <svelte:body
+  on:viewportchanged={() => {
+    console.log(
+      "Viewport Size changed to: ",
+      Viewport.Width + "x" + Viewport.Height
+    );
+  }}
+  on:orientationchangeend={() => {
+    console.log(
+      "Screen Orientation changed to: ",
+      Viewport.Orientation +
+        (Viewport.detailledOrientation == null
+          ? ""
+          : "(" + Viewport.detailledOrientation + ")")
+    );
+  }} /> -->
 
 <div
   bind:this={canvasProxyEl}
