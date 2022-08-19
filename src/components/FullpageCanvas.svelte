@@ -22,6 +22,13 @@
   });
 </script>
 
+<svelte:window
+  on:resize={() => {
+    $canvasStore.width = w;
+    $canvasStore.height = h;
+  }}
+/>
+
 <div
   bind:this={canvasProxyEl}
   class:canvas-proxy={true}
@@ -72,5 +79,9 @@
     &:active {
       cursor: grabbing;
     }
+  }
+
+  canvas {
+    stroke: green;
   }
 </style>

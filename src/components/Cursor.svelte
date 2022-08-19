@@ -25,7 +25,7 @@
 </div>
 
 <style lang="scss">
-  @import "../styles/z-index";
+  @import "../styles/lib";
 
   .cursor-wrapper {
     pointer-events: none;
@@ -42,6 +42,6 @@
     height: 100%;
   }
   circle {
-    fill: #ff3e00;
+    fill: $neon-orange;
   }
 </style>

@@ -24,8 +24,8 @@
     pixel: { x: number; y: number };
   }>) {
     if ($glStore) {
-      $glStore.strokeStyle = "red";
       $glStore.lineWidth = 10;
+      $glStore.strokeStyle = "rgb(235, 36, 34)";
       $glStore.beginPath();
       $glStore.moveTo(pixel.x, pixel.y);
     }
@@ -80,6 +80,7 @@
   <header
     in:fade={{ delay: 0, duration: 100 }}
     out:fade={{ delay: 2000, duration: 100 }}
+    class:no-select={true}
   >
     <button id="navbar-button-menu" class="navbar-button" on:click={toggleMenu}
       ><svg
@@ -123,7 +124,7 @@
   on:panmove={handlePanMove}
   on:panend={handlePanEnd}
 >
-  <div id="slideshow-page-index">
+  <div id="slideshow-page-index" class:no-select={true}>
     <p transition:fade>Project One</p>
     <p transition:fade>Project Two</p>
     <p transition:fade>Project Three</p>
@@ -187,7 +188,7 @@
     left: 0;
     width: 100%;
     height: 100vh;
-    background-color: red;
+    background-color: $neon-orange;
     display: flex;
     align-items: center;
     justify-items: center;
@@ -227,7 +228,7 @@
           color 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
 
         &:hover {
-          transform: translate3d(0, 10px, 0);
+          transform: translate3d(10px, 0, 0);
           opacity: 0.5;
         }
       }
