@@ -4,6 +4,7 @@
 <script lang="ts">
   import { canvasStore, glStore } from "@/stores/canvas.store";
   import { onMount } from "svelte";
+  import { fade } from "svelte/transition";
   // we only want the assets to load once, and for the instructions manual to show once, so we use a global, shared loading state
 
   /** fullscreen canvas*/
@@ -23,7 +24,7 @@
 
     $glStore.lineWidth = 10;
 
-    screen.orientation.lock("portrait");
+    // screen.orientation.lock("portrait");
   });
 </script>
 
@@ -55,6 +56,7 @@
   class:canvas-proxy={true}
   bind:clientWidth={w}
   bind:clientHeight={h}
+  in:fade={{ delay: 200, duration: 200 }}
 >
   <canvas class:webgl-canvas={true} bind:this={canvasEl} />
 </div>
@@ -76,6 +78,8 @@
     left: 0;
     right: 0;
     bottom: 0;
+    height: 100vh;
+    width: 100vw;
 
     background-color: transparent;
 
@@ -100,9 +104,5 @@
     &:active {
       cursor: grabbing;
     }
-  }
-
-  canvas {
-    stroke: green;
   }
 </style>
