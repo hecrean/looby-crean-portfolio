@@ -287,6 +287,9 @@
   #slideshow {
     z-index: $z-7;
     position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     width: 100vw;
     height: 100vh;
     background-color: grey;
