@@ -13,6 +13,10 @@
 
   $: headerVisible = offsetHeight < 10 ? true : dy <= 0 ? true : false;
 
+  const isTouchDevice = () => {
+    return "ontouchstart" in window || navigator.maxTouchPoints > 0;
+  };
+
   function handleWheel(e: WheelEvent): void {
     dy = e.deltaY;
   }
@@ -23,7 +27,7 @@
     ndc: { x: number; y: number };
     pixel: { x: number; y: number };
   }>) {
-    if ($glStore) {
+    if ($glStore && !isTouchDevice) {
       $glStore.lineWidth = 10;
       $glStore.strokeStyle = "rgb(235, 36, 34)";
       $glStore.beginPath();
@@ -34,7 +38,7 @@
   function handlePanMove({
     detail: { xPixel, yPixel },
   }: CustomEvent<PointerDifference>): void {
-    if ($glStore) {
+    if ($glStore && !isTouchDevice) {
       $glStore.lineTo(xPixel, yPixel);
       $glStore.stroke();
     }
@@ -43,7 +47,7 @@
   async function handlePanEnd(
     event: CustomEvent<{ x: number; y: number; dx: number; dy: number }>
   ) {
-    if ($glStore) {
+    if ($glStore && !isTouchDevice) {
       $glStore.stroke();
     }
   }
