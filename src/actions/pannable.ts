@@ -55,8 +55,14 @@ const pointerDifference = <El extends HTMLElement>(
     dTiltX: pointer1.event.tiltX - pointer2.event.tiltX,
     dTiltY: pointer1.event.tiltY - pointer2.event.tiltY,
     dTwist: pointer1.event.twist - pointer2.event.twist,
-    dx: pointer1Coords.ndc.x - pointer2Coords.ndc.x,
-    dy: pointer1Coords.ndc.y - pointer2Coords.ndc.y,
+    dxNDC: pointer1Coords.ndc.x - pointer2Coords.ndc.x,
+    dyNDC: pointer1Coords.ndc.y - pointer2Coords.ndc.y,
+    xNDC: pointer2Coords.ndc.x,
+    yNDC: pointer2Coords.ndc.y,
+    dxPixel: pointer1Coords.pixel.x - pointer2Coords.pixel.x,
+    dyPixel: pointer1Coords.pixel.y - pointer2Coords.pixel.y,
+    xPixel: pointer2Coords.pixel.x,
+    yPixel: pointer2Coords.pixel.y,
   };
 };
 export type PointerDifference = ReturnType<typeof pointerDifference>;
@@ -89,13 +95,13 @@ export const pannable: Action = (node) => {
       element: node,
       event: event,
     };
-    const { ndc } = coordinates(pointerdownEv);
+    const { ndc, pixel } = coordinates(pointerdownEv);
 
     cacheApi.logPointerEvent(pointerdownEv);
 
     node.dispatchEvent(
       new CustomEvent("panstart", {
-        detail: { x: ndc.x, y: ndc.y },
+        detail: { ndc, pixel },
       })
     );
 

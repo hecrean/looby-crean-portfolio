@@ -1,17 +1,52 @@
 <script lang="ts">
+  import { pannable, type PointerDifference } from "@/actions/pannable";
   import Cursor from "@/components/Cursor.svelte";
-  import FullscreenCanvas from "@/components/FullscreenCanvas.svelte";
+  import FullpageCanvas from "@/components/FullpageCanvas.svelte";
   import { createAppStore } from "@/stores/app.store";
+  import { glStore } from "@/stores/canvas.store";
   import { fade } from "svelte/transition";
 
   const { app, toggleMenu } = createAppStore();
 
   let dy: number = 0;
-  $: headerVisible = dy >= 0 ? false : true;
+  let offsetHeight: number = 0;
 
-  const handleWheel = (e: WheelEvent) => {
+  $: headerVisible = offsetHeight < 10 ? true : dy <= 0 ? true : false;
+
+  function handleWheel(e: WheelEvent): void {
     dy = e.deltaY;
-  };
+  }
+
+  function handlePanStart({
+    detail: { pixel },
+  }: CustomEvent<{
+    ndc: { x: number; y: number };
+    pixel: { x: number; y: number };
+  }>) {
+    if ($glStore) {
+      $glStore.strokeStyle = "red";
+      $glStore.lineWidth = 10;
+      $glStore.beginPath();
+      $glStore.moveTo(pixel.x, pixel.y);
+    }
+  }
+
+  function handlePanMove({
+    detail: { xPixel, yPixel },
+  }: CustomEvent<PointerDifference>): void {
+    if ($glStore) {
+      $glStore.lineTo(xPixel, yPixel);
+      $glStore.stroke();
+    }
+  }
+
+  async function handlePanEnd(
+    event: CustomEvent<{ x: number; y: number; dx: number; dy: number }>
+  ) {
+    if ($glStore) {
+      $glStore.stroke();
+    }
+  }
 </script>
 
 <!-- Full page containers, which are generally hidden -->
@@ -19,9 +54,8 @@
 <svelte:window on:wheel={handleWheel} />
 
 <Cursor />
-<div class:canvas-wrapper={true}>
-  <FullscreenCanvas />
-</div>
+
+<FullpageCanvas />
 
 {#if $app.menuOpen}
   <div id="menu-wrapper" data-visible={$app.menuOpen} transition:fade>
@@ -81,7 +115,14 @@
   </header>
 {/if}
 
-<main id="slideshow">
+<main
+  id="slideshow"
+  bind:offsetHeight
+  use:pannable
+  on:panstart|stopPropagation={handlePanStart}
+  on:panmove={handlePanMove}
+  on:panend={handlePanEnd}
+>
   <div id="slideshow-page-index">
     <p transition:fade>Project One</p>
     <p transition:fade>Project Two</p>
@@ -136,6 +177,7 @@
     touch-action: none;
     pointer-events: none;
   }
+
   #menu-wrapper {
     z-index: $z-9;
     position: fixed;
