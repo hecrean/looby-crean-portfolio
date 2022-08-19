@@ -164,6 +164,11 @@
 <style lang="scss">
   @import "../styles/lib";
 
+  header {
+    background-color: transparent;
+    height: 0;
+  }
+
   .hide-header-item {
     opacity: 0;
     transition: opacity 50ms cubic-bezier(0.215, 0.61, 0.355, 1) 0.4s;
